@@ -6,7 +6,7 @@ import {
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Category } from './entities/category.entity';
+import { Category, CategoryDocument } from './entities/category.entity';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -15,18 +15,20 @@ export class CategoriesService {
     @InjectModel(Category.name) private readonly categoryModel: Model<Category>,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+  async create(
+    createCategoryDto: CreateCategoryDto,
+  ): Promise<CategoryDocument> {
     if (await this.categoryModel.findOne({ name: createCategoryDto.name })) {
       throw new ConflictException('category name already exists');
     }
     return await this.categoryModel.create(createCategoryDto);
   }
 
-  findAll(): Promise<Category[]> {
+  findAll(): Promise<CategoryDocument[]> {
     return this.categoryModel.find();
   }
 
-  async findOne(id: string): Promise<Category> {
+  async findOne(id: string): Promise<CategoryDocument> {
     const category = await this.categoryModel.findById(id);
     if (!category) {
       throw new NotFoundException('Cannot find category with id ' + id);
@@ -37,7 +39,7 @@ export class CategoriesService {
   async update(
     id: string,
     updateCategoryDto: UpdateCategoryDto,
-  ): Promise<Category> {
+  ): Promise<CategoryDocument> {
     const category = await this.categoryModel.findByIdAndUpdate(
       id,
       updateCategoryDto,
