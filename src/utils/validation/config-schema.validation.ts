@@ -7,4 +7,7 @@ export const configSchemaValidation = Joi.object({
   DATABASE_URI: Joi.string().uri().required(),
 
   JWT_SECRET_KEY: Joi.string().required(),
+  JWT_EXPIRES_IN: Joi.string().required(),
+
+  COOKIE_TOKEN_MAX_AGE: Joi.number().required(),
 });
