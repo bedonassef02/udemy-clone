@@ -4,6 +4,8 @@ import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { configSchemaValidation } from './utils/validation/config-schema.validation';
+import { CoursesModule } from './courses/courses.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { configSchemaValidation } from './utils/validation/config-schema.validat
     UsersModule,
     AuthModule,
     DatabaseModule,
+    CoursesModule,
+    CategoriesModule,
   ],
 })
 export class AppModule {}
