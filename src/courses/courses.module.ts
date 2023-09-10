@@ -9,11 +9,11 @@ import { CoursesController } from './courses.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Course, CourseSchema } from './entities/course.entity';
 import { SectionsModule } from '../sections/sections.module';
-import {AuthModule} from "../auth/auth.module";
-import {UsersModule} from "../users/users.module";
-import {EnrollmentModule} from "../enrollment/enrollment.module";
-import {AuthMiddleware} from "../auth/middlewares/auth.middleware";
-import {IsUserUpdatedMiddleware} from "../auth/middlewares/is-user-updated.middleware";
+import { AuthModule } from '../auth/auth.module';
+import { UsersModule } from '../users/users.module';
+import { EnrollmentModule } from '../enrollment/enrollment.module';
+import { AuthMiddleware } from '../auth/middlewares/auth.middleware';
+import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.middleware';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Course.name, schema: CourseSchema }]),

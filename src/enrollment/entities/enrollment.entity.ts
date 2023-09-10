@@ -1,8 +1,7 @@
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import {User} from "../../users/entities/user.entity";
-import {Course} from "../../courses/entities/course.entity";
+import { User } from '../../users/entities/user.entity';
+import { Course } from '../../courses/entities/course.entity';
 
 export type EnrollmentDocument = HydratedDocument<Enrollment>;
 @Schema({ timestamps: true })

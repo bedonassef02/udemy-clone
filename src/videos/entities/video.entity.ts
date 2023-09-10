@@ -1,6 +1,6 @@
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import {Section} from "../../sections/entities/section.entity";
+import { Section } from '../../sections/entities/section.entity';
 
 export type VideoDocument = HydratedDocument<Video>;
 
