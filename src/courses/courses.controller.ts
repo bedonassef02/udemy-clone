@@ -13,7 +13,6 @@ import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CourseDocument } from './entities/course.entity';
-import { ConvertSlugToIdInterceptor } from './utils/interceptors/convert-slug-to-id.interceptor';
 import { ParseMongoIdPipe } from '../utils/pipes/parse-mongo-id.pipe';
 
 @Controller('courses')
@@ -31,14 +30,12 @@ export class CoursesController {
   }
 
   @Get(':id')
-  @UseInterceptors(ConvertSlugToIdInterceptor)
   @UsePipes(ParseMongoIdPipe)
   findOne(@Param('id') id: string): Promise<CourseDocument> {
     return this.coursesService.findOne(id);
   }
 
   @Patch(':id')
-  @UseInterceptors(ConvertSlugToIdInterceptor)
   update(
     @Param('id', ParseMongoIdPipe) id: string,
     @Body() updateCourseDto: UpdateCourseDto,
@@ -47,7 +44,6 @@ export class CoursesController {
   }
 
   @Delete(':id')
-  @UseInterceptors(ConvertSlugToIdInterceptor)
   @UsePipes(ParseMongoIdPipe)
   async remove(@Param('id') id: string): Promise<void> {
     await this.coursesService.remove(id);
