@@ -3,6 +3,7 @@ import { User } from '../../users/entities/user.entity';
 import * as mongoose from 'mongoose';
 import { HydratedDocument } from 'mongoose';
 import { LANGUAGE } from '../utils/types/language';
+import { Category } from '../../categories/entities/category.entity';
 
 export type CourseDocument = HydratedDocument<Course>;
 
@@ -29,6 +30,8 @@ export class Course {
   learn: string[];
   @Prop()
   price: number;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
+  category: Category;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);

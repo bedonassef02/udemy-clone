@@ -12,7 +12,9 @@ export class CoursesService {
   ) {}
 
   create(createCourseDto: CreateCourseDto): Promise<CourseDocument> {
-    return this.courseModel.create(createCourseDto);
+    const course: CourseDocument = new this.courseModel(createCourseDto);
+    course.slug = createCourseDto.slug + '-' + course.id;
+    return course.save();
   }
 
   findAll(): Promise<CourseDocument[]> {
