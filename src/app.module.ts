@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { configSchemaValidation } from './utils/validation/config-schema.validation';
 import { CoursesModule } from './courses/courses.module';
 import { CategoriesModule } from './categories/categories.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RoleGuard } from './auth/guards/role.guard';
 
 @Module({
   imports: [
@@ -18,6 +20,12 @@ import { CategoriesModule } from './categories/categories.module';
     DatabaseModule,
     CoursesModule,
     CategoriesModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard,
+    },
   ],
 })
 export class AppModule {}

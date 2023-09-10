@@ -4,7 +4,7 @@ import { UpdateVideoDto } from './dto/update-video.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Video, VideoDocument } from './entities/video.entity';
 import { Model } from 'mongoose';
-import { FindVideos } from './types/find-videos';
+import { FilterVideosDto } from './dto/filter-videos.dto';
 
 @Injectable()
 export class VideosService {
@@ -16,11 +16,11 @@ export class VideosService {
     return this.videoModel.create(createVideoDto);
   }
 
-  findAll(filter: FindVideos): Promise<VideoDocument[]> {
+  findAll(filter: FilterVideosDto): Promise<VideoDocument[]> {
     return this.videoModel.find();
   }
 
-  async findOne(filter: FindVideos): Promise<VideoDocument> {
+  async findOne(filter: FilterVideosDto): Promise<VideoDocument> {
     const video: VideoDocument | undefined =
       await this.videoModel.findOneAndUpdate(filter, {
         new: true,
@@ -32,7 +32,7 @@ export class VideosService {
   }
 
   async update(
-    filter: FindVideos,
+    filter: FilterVideosDto,
     updateVideoDto: UpdateVideoDto,
   ): Promise<VideoDocument> {
     const video: VideoDocument | undefined =
@@ -45,7 +45,7 @@ export class VideosService {
     return video;
   }
 
-  async remove(filter: FindVideos): Promise<void> {
+  async remove(filter: FilterVideosDto): Promise<void> {
     await this.videoModel.findOneAndRemove(filter);
   }
 }

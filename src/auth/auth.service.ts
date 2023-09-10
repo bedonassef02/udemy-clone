@@ -41,6 +41,10 @@ export class AuthService {
   }
 
   verifyToken(accessToken: string): Promise<any> {
-    return this.jwtService.verify(accessToken);
+    try {
+      return this.jwtService.verify(accessToken);
+    } catch (e) {
+      throw new UnauthorizedException('invalid token');
+    }
   }
 }

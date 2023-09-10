@@ -11,12 +11,16 @@ import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { ParseMongoIdPipe } from '../../../utils/pipes/parse-mongo-id.pipe';
+import { Roles } from '../../../utils/decorators/roles.decorator';
+import { USER_ROLES } from '../../../users/utils/types/user-role';
+import { Public } from '../../../utils/decorators/public.decorator';
 
 @Controller('courses/:course/sections/:section/videos')
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
   @Post()
+  @Roles(USER_ROLES.INSTRUCTOR)
   create(
     @Param('course', ParseMongoIdPipe) course: string,
     @Param('section', ParseMongoIdPipe) section: string,
@@ -26,6 +30,7 @@ export class VideosController {
   }
 
   @Get()
+  @Public()
   findAll(
     @Param('course', ParseMongoIdPipe) course: string,
     @Param('section', ParseMongoIdPipe) section: string,
@@ -34,6 +39,8 @@ export class VideosController {
   }
 
   @Get(':id')
+  // TODO: make for enrolled users only
+  @Public()
   findOne(
     @Param('course', ParseMongoIdPipe) course: string,
     @Param('section', ParseMongoIdPipe) section: string,
@@ -43,6 +50,8 @@ export class VideosController {
   }
 
   @Patch(':id')
+  @Roles(USER_ROLES.INSTRUCTOR, USER_ROLES.ADMIN)
+  // TODO: update name or description only
   update(
     @Param('course', ParseMongoIdPipe) course: string,
     @Param('section', ParseMongoIdPipe) section: string,
@@ -53,6 +62,7 @@ export class VideosController {
   }
 
   @Delete(':id')
+  @Roles(USER_ROLES.ADMIN)
   remove(
     @Param('course', ParseMongoIdPipe) course: string,
     @Param('section', ParseMongoIdPipe) section: string,
