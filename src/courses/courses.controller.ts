@@ -17,7 +17,7 @@ import { Roles } from '../utils/decorators/roles.decorator';
 import { USER_ROLES } from '../users/utils/types/user-role';
 import { Public } from '../utils/decorators/public.decorator';
 
-@Controller('courses')
+@Controller({ path: 'courses', version: '1' })
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
 

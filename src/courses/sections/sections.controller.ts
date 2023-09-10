@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { SectionsService } from './sections.service';
 import { CreateSectionDto } from './dto/create-section.dto';
@@ -15,8 +16,10 @@ import { SectionDocument } from './entities/section.entity';
 import { Roles } from '../../utils/decorators/roles.decorator';
 import { USER_ROLES } from '../../users/utils/types/user-role';
 import { Public } from '../../utils/decorators/public.decorator';
+import { IsUserEnrolledGuard } from '../guards/is-user-enrolled.guard';
 
-@Controller('courses/:course/sections')
+@Controller({ path: 'courses/:course/sections', version: '1' })
+@UseGuards(IsUserEnrolledGuard)
 export class SectionsController {
   constructor(private readonly sectionsService: SectionsService) {}
 

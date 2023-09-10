@@ -15,7 +15,7 @@ import { Roles } from '../utils/decorators/roles.decorator';
 import { USER_ROLES } from '../users/utils/types/user-role';
 import { Public } from '../utils/decorators/public.decorator';
 
-@Controller('categories')
+@Controller({ path: 'categories', version: '1' })
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

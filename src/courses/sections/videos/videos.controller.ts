@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
@@ -14,8 +15,10 @@ import { ParseMongoIdPipe } from '../../../utils/pipes/parse-mongo-id.pipe';
 import { Roles } from '../../../utils/decorators/roles.decorator';
 import { USER_ROLES } from '../../../users/utils/types/user-role';
 import { Public } from '../../../utils/decorators/public.decorator';
+import { IsUserEnrolledGuard } from '../../guards/is-user-enrolled.guard';
 
-@Controller('courses/:course/sections/:section/videos')
+@Controller({ path: 'courses/:course/sections/:section/videos', version: '1' })
+@UseGuards(IsUserEnrolledGuard)
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 

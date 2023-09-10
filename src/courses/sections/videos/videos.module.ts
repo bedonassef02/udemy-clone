@@ -7,12 +7,14 @@ import { AuthMiddleware } from '../../../auth/middlewares/auth.middleware';
 import { IsUserUpdatedMiddleware } from '../../../auth/middlewares/is-user-updated.middleware';
 import { AuthModule } from '../../../auth/auth.module';
 import { UsersModule } from '../../../users/users.module';
+import { EnrollmentModule } from '../../enrollment/enrollment.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Video.name, schema: VideoSchema }]),
     AuthModule,
     UsersModule,
+    EnrollmentModule,
   ],
   controllers: [VideosController],
   providers: [VideosService],

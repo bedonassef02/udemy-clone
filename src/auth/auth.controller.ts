@@ -6,7 +6,7 @@ import { SignInDto } from './dto/sign-in.dto';
 import { CookieTokenInterceptor } from './utils/interceptors/cookie-token.interceptor';
 import { Public } from '../utils/decorators/public.decorator';
 
-@Controller('auth')
+@Controller({ path: 'auth', version: '1' })
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

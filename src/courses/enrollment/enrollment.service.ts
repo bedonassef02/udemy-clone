@@ -17,4 +17,9 @@ export class EnrollmentService {
   findAll(filter: FilterEnrollmentDto) {
     return this.enrollmentModel.find(filter);
   }
+
+  async isUserEnrollToCourse(user: string, course: string): Promise<boolean> {
+    const dbCourse = await this.enrollmentModel.findOne({ user, course });
+    return dbCourse ? true : false;
+  }
 }
