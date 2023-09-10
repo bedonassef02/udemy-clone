@@ -39,4 +39,8 @@ export class AuthService {
     }
     throw new UnauthorizedException(`email or password mismatch our records`);
   }
+
+  verifyToken(accessToken: string): Promise<any> {
+    return this.jwtService.verify(accessToken);
+  }
 }
