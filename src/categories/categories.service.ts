@@ -18,10 +18,10 @@ export class CategoriesService {
   async create(
     createCategoryDto: CreateCategoryDto,
   ): Promise<CategoryDocument> {
-    if (await this.categoryModel.findOne({ name: createCategoryDto.name })) {
-      throw new ConflictException('category name already exists');
+    if (await this.categoryModel.findOne({ slug: createCategoryDto.slug })) {
+      throw new ConflictException('category is already exists');
     }
-    return await this.categoryModel.create(createCategoryDto);
+    return this.categoryModel.create(createCategoryDto);
   }
 
   findAll(): Promise<CategoryDocument[]> {
@@ -31,7 +31,7 @@ export class CategoriesService {
   async findOne(id: string): Promise<CategoryDocument> {
     const category = await this.categoryModel.findById(id);
     if (!category) {
-      throw new NotFoundException('Cannot find category with id ' + id);
+      throw new NotFoundException('category not found');
     }
     return category;
   }
@@ -46,12 +46,12 @@ export class CategoriesService {
       { new: true },
     );
     if (!category) {
-      throw new NotFoundException('Cannot find category with id ' + id);
+      throw new NotFoundException('category not found');
     }
     return category;
   }
 
   async remove(id: string): Promise<void> {
-    await this.categoryModel.findByIdAndDelete(id);
+    await this.categoryModel.findByIdAndRemove(id);
   }
 }
