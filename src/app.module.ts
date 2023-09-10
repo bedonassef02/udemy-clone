@@ -8,6 +8,9 @@ import { CoursesModule } from './courses/courses.module';
 import { CategoriesModule } from './categories/categories.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RoleGuard } from './auth/guards/role.guard';
+import {EnrollmentModule} from "./enrollment/enrollment.module";
+import {SectionsModule} from "./sections/sections.module";
+import {VideosModule} from "./videos/videos.module";
 
 @Module({
   imports: [
@@ -20,6 +23,9 @@ import { RoleGuard } from './auth/guards/role.guard';
     DatabaseModule,
     CoursesModule,
     CategoriesModule,
+      EnrollmentModule,
+      SectionsModule,
+      VideosModule,
   ],
   providers: [
     {

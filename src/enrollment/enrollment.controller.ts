@@ -7,12 +7,12 @@ import {
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
-import { EnrollmentService } from './enrollment.service';
-import { ParseMongoIdPipe } from '../../utils/pipes/parse-mongo-id.pipe';
-import { Roles } from '../../utils/decorators/roles.decorator';
-import { USER_ROLES } from '../../users/utils/types/user-role';
-import { IsAlreadyEnrolledFilter } from './filters/is-already-enrolled.filter';
-import { IsUserEnrolledGuard } from '../guards/is-user-enrolled.guard';
+import {EnrollmentService} from "./enrollment.service";
+import {USER_ROLES} from "../users/utils/types/user-role";
+import {Roles} from "../utils/decorators/roles.decorator";
+import {IsUserEnrolledGuard} from "../courses/guards/is-user-enrolled.guard";
+import {IsAlreadyEnrolledFilter} from "./filters/is-already-enrolled.filter";
+import {ParseMongoIdPipe} from "../utils/pipes/parse-mongo-id.pipe";
 
 @Controller({ path: 'courses/:course/enroll', version: '1' })
 export class EnrollmentController {

@@ -11,12 +11,12 @@ import {
 import { SectionsService } from './sections.service';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
-import { ParseMongoIdPipe } from '../../utils/pipes/parse-mongo-id.pipe';
+import { ParseMongoIdPipe } from '../utils/pipes/parse-mongo-id.pipe';
 import { SectionDocument } from './entities/section.entity';
-import { Roles } from '../../utils/decorators/roles.decorator';
-import { USER_ROLES } from '../../users/utils/types/user-role';
-import { Public } from '../../utils/decorators/public.decorator';
-import { IsUserEnrolledGuard } from '../guards/is-user-enrolled.guard';
+import { Roles } from '../utils/decorators/roles.decorator';
+import { USER_ROLES } from '../users/utils/types/user-role';
+import { Public } from '../utils/decorators/public.decorator';
+import { IsUserEnrolledGuard } from '../courses/guards/is-user-enrolled.guard';
 
 @Controller({ path: 'courses/:course/sections', version: '1' })
 @UseGuards(IsUserEnrolledGuard)
