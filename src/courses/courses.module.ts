@@ -1,4 +1,5 @@
 import {
+  forwardRef,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -19,8 +20,8 @@ import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.mid
     MongooseModule.forFeature([{ name: Course.name, schema: CourseSchema }]),
     AuthModule,
     UsersModule,
-    SectionsModule,
-    EnrollmentModule,
+    forwardRef(() => SectionsModule),
+    forwardRef(() => EnrollmentModule),
   ],
   controllers: [CoursesController],
   providers: [CoursesService],
