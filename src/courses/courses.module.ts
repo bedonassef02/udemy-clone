@@ -24,6 +24,7 @@ import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.mid
   ],
   controllers: [CoursesController],
   providers: [CoursesService],
+  exports: [CoursesService],
 })
 export class CoursesModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

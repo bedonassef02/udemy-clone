@@ -13,8 +13,6 @@ export class Video {
   description: string;
   @Prop()
   duration: number;
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Section' })
-  section: Section;
 }
 
 export const VideoSchema = SchemaFactory.createForClass(Video);

@@ -11,6 +11,7 @@ import { RoleGuard } from './auth/guards/role.guard';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { SectionsModule } from './sections/sections.module';
 import { VideosModule } from './videos/videos.module';
+import { CouponsModule } from './coupons/coupons.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { VideosModule } from './videos/videos.module';
     EnrollmentModule,
     SectionsModule,
     VideosModule,
+    CouponsModule,
   ],
   providers: [
     {

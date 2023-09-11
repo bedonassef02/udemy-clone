@@ -29,7 +29,7 @@ export class SectionsController {
     @Param('course', ParseMongoIdPipe) course: string,
     @Body() createSectionDto: CreateSectionDto,
   ): Promise<SectionDocument> {
-    createSectionDto['course'] = course;
+    createSectionDto.course = course;
     return this.sectionsService.create(createSectionDto);
   }
 

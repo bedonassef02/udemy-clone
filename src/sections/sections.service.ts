@@ -5,14 +5,20 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Section, SectionDocument } from './entities/section.entity';
 import { Model } from 'mongoose';
 import { FilterSectionDto } from './dto/filter-section.dto';
+import { CoursesService } from '../courses/courses.service';
 
 @Injectable()
 export class SectionsService {
   constructor(
     @InjectModel(Section.name) private readonly sectionModel: Model<Section>,
+    private readonly coursesService: CoursesService,
   ) {}
-  create(createSectionDto: CreateSectionDto): Promise<SectionDocument> {
-    return this.sectionModel.create(createSectionDto);
+  async create(createSectionDto: CreateSectionDto): Promise<SectionDocument> {
+    const section: SectionDocument = await this.sectionModel.create(
+      createSectionDto,
+    );
+    await this.coursesService.addSection(createSectionDto.course, section);
+    return section;
   }
 
   findAll(filter: FilterSectionDto): Promise<SectionDocument[]> {

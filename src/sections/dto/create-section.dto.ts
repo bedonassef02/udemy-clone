@@ -4,4 +4,5 @@ export class CreateSectionDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+  course?: string;
 }

@@ -4,6 +4,7 @@ import { UpdateCourseDto } from './dto/update-course.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Course, CourseDocument } from './entities/course.entity';
 import { Model } from 'mongoose';
+import { Section } from '../sections/entities/section.entity';
 
 @Injectable()
 export class CoursesService {
@@ -22,11 +23,24 @@ export class CoursesService {
   }
 
   async findOne(id: string): Promise<CourseDocument> {
-    const course: CourseDocument = await this.courseModel.findById(id);
+    const course: CourseDocument = await this.courseModel
+      .findById(id)
+      .populate({
+        path: 'sections',
+        populate: {
+          path: 'videos',
+        },
+      });
     if (!course) {
       throw new NotFoundException(`course with id ${id} not found`);
     }
     return course;
+  }
+
+  async addSection(course: string, section: Section): Promise<void> {
+    const dbCourse: CourseDocument = await this.courseModel.findById(course);
+    dbCourse.sections.push(section);
+    await dbCourse.save();
   }
 
   async update(
