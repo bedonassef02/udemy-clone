@@ -7,7 +7,7 @@ import { AuthMiddleware } from '../auth/middlewares/auth.middleware';
 import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.middleware';
 import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
-import {CoursesService} from "../courses/courses.service";
+import { CoursesService } from '../courses/courses.service';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import {CoursesService} from "../courses/courses.service";
   ],
   controllers: [CouponsController],
   providers: [CouponsService],
-  exports:[CouponsService]
+  exports: [CouponsService],
 })
 export class CouponsModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

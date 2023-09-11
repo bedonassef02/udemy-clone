@@ -1,4 +1,9 @@
-import {forwardRef, MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
+import {
+  forwardRef,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+} from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { EnrollmentController } from './enrollment.controller';
 import { MongooseModule } from '@nestjs/mongoose';
