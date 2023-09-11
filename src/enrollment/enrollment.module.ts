@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {forwardRef, MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { EnrollmentController } from './enrollment.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -7,6 +7,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
 import { AuthMiddleware } from '../auth/middlewares/auth.middleware';
 import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.middleware';
+import { PaymentModule } from '../payment/payment.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { IsUserUpdatedMiddleware } from '../auth/middlewares/is-user-updated.mid
     ]),
     AuthModule,
     UsersModule,
+    forwardRef(() => PaymentModule),
   ],
   controllers: [EnrollmentController],
   providers: [EnrollmentService],

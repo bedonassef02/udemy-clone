@@ -13,13 +13,14 @@ import { Roles } from '../utils/decorators/roles.decorator';
 import { IsUserEnrolledGuard } from '../courses/guards/is-user-enrolled.guard';
 import { IsAlreadyEnrolledFilter } from './filters/is-already-enrolled.filter';
 import { ParseMongoIdPipe } from '../utils/pipes/parse-mongo-id.pipe';
+import { PaidGuard } from '../payment/guards/paid.guard';
 
 @Controller({ path: 'courses/:course/enroll', version: '1' })
 export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
   @Post()
   @Roles(USER_ROLES.STUDENT, USER_ROLES.INSTRUCTOR, USER_ROLES.ADMIN)
-  @UseGuards(IsUserEnrolledGuard)
+  @UseGuards(PaidGuard, IsUserEnrolledGuard)
   @UseFilters(IsAlreadyEnrolledFilter)
   create(
     @Req() request: any,
@@ -31,7 +32,7 @@ export class EnrollmentController {
 
   @Get()
   @Roles(USER_ROLES.INSTRUCTOR, USER_ROLES.ADMIN)
-  findAll() {
-    return this.enrollmentService.findAll({ course: '' });
+  findAll(@Param('course', ParseMongoIdPipe) course: string) {
+    return this.enrollmentService.findAll({ course });
   }
 }

@@ -12,6 +12,7 @@ import { EnrollmentModule } from './enrollment/enrollment.module';
 import { SectionsModule } from './sections/sections.module';
 import { VideosModule } from './videos/videos.module';
 import { CouponsModule } from './coupons/coupons.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { CouponsModule } from './coupons/coupons.module';
     SectionsModule,
     VideosModule,
     CouponsModule,
+    PaymentModule,
   ],
   providers: [
     {
